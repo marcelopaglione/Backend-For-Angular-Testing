@@ -1,8 +1,11 @@
 package com.rest.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class User {
@@ -10,35 +13,21 @@ public class User {
 	@GeneratedValue
 	private Long id;
 	private String nome;
-	private String cep;
-	private String rua;
-	private String numero;
-	private String estado;
-	private String cidade;
-	private String complemento;
-	private String bairro;
+	private String email;
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	private Endereco endereco;
 
 	public User() {
 	}
 
-	public User(String nome, String cep, String rua, String numero, String estado, String cidade, String complemento,
-			String bairro) {
+	public User(String nome, String email, Endereco endereco) {
+
 		this.nome = nome;
-		this.cep = cep;
-		this.rua = rua;
-		this.numero = numero;
-		this.estado = estado;
-		this.cidade = cidade;
-		this.complemento = complemento;
-		this.bairro = bairro;
+		this.email = email;
+		this.endereco = endereco;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", nome=" + nome + ", cep=" + cep + ", rua=" + rua + ", numero=" + numero
-				+ ", estado=" + estado + ", cidade=" + cidade + ", complemento=" + complemento + ", bairro=" + bairro
-				+ "]";
-	}
+
 
 	public Long getId() {
 		return id;
@@ -56,60 +45,22 @@ public class User {
 		this.nome = nome;
 	}
 
-	public String getCep() {
-		return cep;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setCep(String cep) {
-		this.cep = cep;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getRua() {
-		return rua;
+	public Endereco getEndereco() {
+		return endereco;
 	}
 
-	public void setRua(String rua) {
-		this.rua = rua;
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-
-	public String getComplemento() {
-		return complemento;
-	}
-
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
-
-	public String getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
+	
 
 }
